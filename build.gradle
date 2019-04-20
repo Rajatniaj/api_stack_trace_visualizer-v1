@@ -1,0 +1,93 @@
+group 'com.tgt.api'
+version '1.0-SNAPSHOT'
+
+
+buildscript {
+    ext {
+        javaVersion = 1.8
+
+        // Camel
+        // camelVersion = '2.17.1'
+
+        // ESV libraries
+
+        // Gradle Git Plugin
+        gradleGitPluginVersion = '1.1.0'
+
+        // Gradle Wrapper
+        gradleWrapperVersion = '2.3'
+
+        // Groovy
+        groovyAllVersion = '2.4.3'
+
+        // Java version compatibility
+        srcCompactibilityVersion = '1.8'
+        tgtCompactibilityVersion = '1.8'
+
+
+        // Spring Loaded
+        springLoadedVersion = '1.2.5.RELEASE'
+
+        // Spring Boot
+        springBootVersion = '1.4.1.RELEASE'
+
+
+        springSpockVersion = '1.0-groovy-2.4'
+        springTestVersion = '4.1.6.RELEASE'
+
+
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+
+    }
+}
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+configurations{
+    compile.exclude module: 'slf4j-simple'
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR5"
+    }
+}
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-jdbc:1.2.3.RELEASE") {
+        exclude module: 'logback-classic'
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.3.RELEASE'
+    compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtime('com.h2database:h2')
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.3.148'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
