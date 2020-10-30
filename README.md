@@ -1,7 +1,7 @@
 # stack_trace_visualizer_api-v1
-This API can be used to POST stack trace of an application.It can also be query/get CPU flamegraph in HTML format
+This API can be used to POST stack traces of an application.It can also be query/get CPU flamegraph in HTML format
 
-Sample URLs:
+Sample URL:
 POST URL :http://localhost:8080/stacktrace
 
 Sample Json for POST:
